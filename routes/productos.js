@@ -26,20 +26,16 @@ router.get('/getDatosProductos', function(req, res, next) {
 
 router.get('/datos', function(req, res, next) {
 
-  var datos =  {
-        universidad:"DeLaSalle",
-        productos:[
-               {matricula:105597,alumno:"Felipe",edad:28},
-               {matricula:105596,alumno:"Oscar",edad:27},
-               {matricula:105599,alumno:"Luis",edad:26},
-               {matricula:105597,alumno:"Pedro",edad:25}
-        ],
-        carrera:{web:"si",movil:"no"},
-        page:"datos"
-  };
-
-  res.render("productosestatic",datos);
-
+    bd.query('SELECT descripcion,precio,existencia FROM productos', function(error, results, fields){
+        if (error) {            
+            console.log('error en el listado');
+            return;
+        }    
+        var string=JSON.stringify(results);
+	    var datos =  JSON.parse(string);
+        res.render('productosestatic',{productos:datos,page:"datos"});
+    });
+  
 });
 
 router.get('/alta', function(req, res, next) {
