@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head></head>
+<body>
+<a href="/" class="btn btn-link">
+	<span class="glyphicon glyphicon-chevron-left"></span>
+	Regresar
+</a>
+<h1>{{universidad}}</h1>
+
+
+<table class="table">
+
+<tr style="font-weight: bold;">
+<td>Matricula</td><td>Alumno</td><td>Edad</td>
+</tr>
+
+{{#each productos}}
+  <tr>
+   <td>{{matricula}}</td> <td>{{alumno}}</td> <td>{{edad}}</td>
+  </tr>
+{{/each}}
+</table>
+
+<div style="clear: both;height: 20px"></div>
+
+<div>
+	<strong>Sabe programacion movil:</strong> {{carrera.movil}}
+</div>
+
+<div style="clear: both;height: 20px"></div>
+<div>
+	<strong>Sabe programacion web:</strong> {{carrera.web}}
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
