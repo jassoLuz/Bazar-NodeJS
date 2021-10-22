@@ -4,7 +4,7 @@ var router = express.Router();
 var bd=require('./bd');
 
 router.get('/', function(req, res, next) {
-    bd.query('SELECT descripcion,precio,existencia FROM productos', function(error, results, fields){
+    bd.query('SELECT IdProducto,descripcion,precio,existencia FROM productos', function(error, results, fields){
         if (error) {            
             console.log('error en el listado');
             return;
@@ -26,7 +26,7 @@ router.get('/getDatosProductos', function(req, res, next) {
 
 router.get('/datos', function(req, res, next) {
 
-    bd.query('SELECT descripcion,precio,existencia FROM productos', function(error, results, fields){
+    bd.query('SELECT IdProducto,descripcion,precio,existencia FROM productos', function(error, results, fields){
         if (error) {            
             console.log('error en el listado');
             return;
@@ -63,8 +63,8 @@ router.get('/modificar/:id', function(req, res, next) {
 
 });
 
-router.get('/login', function(req, res, next) {
-    res.render('login',{page:"login",ope:"c"});
+router.get('/auth', function(req, res, next) {
+    res.render('auth',{page:"auth",ope:"c"});
 });
 //alta,modificar,eliminar
 router.post('/operacion', function(req, res, next) {

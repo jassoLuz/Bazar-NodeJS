@@ -4,18 +4,16 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var expressValidator = require('express-validator');
+var flash = require('express-flash');
 var index = require('./routes/index');
+var authRouter = require('./routes/auth');
 var users = require('./routes/users');
 var productos = require("./routes/productos");
-var login = require('./routes/login');
-
+//var login = require('./routes/login');
 var exphbs  = require('express-handlebars');
-
 var session = require('express-session');
-
 var app = express();
-
 
 //app.set('view engine', 'hbs');
 //app.engine('handlebars', exphbs({defaultLayout: 'layout'}));
@@ -38,21 +36,25 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({secret: '$Rv@dw1u', resave: true, saveUninitialized: true}));
-
-
+app.use(flash());
+app.use(expressValidator());
 app.use('/', index);
 app.use('/users', users);
 app.use("/productos",productos);
+
 //app.use(express.static('/views/assets'));
-app.use('/login',login);
+app.use("/auth",authRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
+  console.error();
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
+  console.log(err);
 });
 
 // error handler
