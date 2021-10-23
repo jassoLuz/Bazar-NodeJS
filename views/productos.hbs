@@ -2,7 +2,7 @@
 <head>
 	<title></title>
 </head>
-<body>
+
 <a href="/" class="btn btn-link">
 	<span class="glyphicon glyphicon-chevron-left"></span>
 	Regresar
@@ -13,7 +13,7 @@
 </div>
 
 <div style="clear: both;height: 20px"></div>
-
+<body>
  <table class="table">
 
 <tr style="font-weight: bold;">
@@ -21,7 +21,7 @@
 </tr>
 
 {{#each productos}}
-  <tr id="fila{{IdProducto}}">
+  <tr IdProducto="fila{{IdProducto}}">
    <td>{{descripcion}}</td> <td>{{precio}}</td> <td>{{existencia}}</td> 
    <td>
     <button type="button" class="btn btn-primary" aria-label="Left Align" style="margin-bottom: 2px;margin-top: 2px;" 
@@ -31,7 +31,7 @@
 
 	<button type="button" class="btn btn-danger" aria-label="Left Align" style="margin-bottom: 2px;margin-top: 2px;" 
 	onclick="eliminarUsuario('{{IdProducto}}')">
-	  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+	  <span class="glyphicon glyphicon-tag" aria-hidden="true"></span>
 	</button>
    </td>
   </tr>
@@ -42,6 +42,23 @@
 	
    consultarUsuario = function(IdProducto){
    	window.location.href = "/productos/modificar/"+IdProducto;
+     $.post("/productos/operacion",{
+			          IdProducto: IdProducto,
+                descripcion: descripcion,
+                precio: precio,
+                existencia: existencia,
+			          ope:"u"
+			        },
+			        function(data,status){
+                       
+                       if (parseInt(data) == 1) {
+                           BootstrapDialog.alert('Se actualizó correctamente');
+                           //$("#fila"+IdProducto).remove();
+                       }else{
+                       	 BootstrapDialog.alert('Error al intentar modificar');
+                       }
+
+			        });
    }
 
 
@@ -49,7 +66,7 @@
 
       BootstrapDialog.confirm({
        	    title: 'Operación',
-            message: 'Deseas eliminar el registro?',
+            message: 'Deseas comprar este producto?',
             type: BootstrapDialog.TYPE_PRIMARY, 
             closable: true, 
             btnCancelLabel: 'Cancelar', 
@@ -65,10 +82,10 @@
 			        function(data,status){
                        
                        if (parseInt(data) == 1) {
-                           BootstrapDialog.alert('Se elimino correctamente');
+                           BootstrapDialog.alert('Compra efectuada correctamente');
                            $("#fila"+IdProducto).remove();
                        }else{
-                       	 BootstrapDialog.alert('Error al eliminar');
+                       	 BootstrapDialog.alert('Error al comprar');
                        }
 
 			        });

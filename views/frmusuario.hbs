@@ -56,10 +56,10 @@
 
 </fieldset>
 
-<div class="alert alert-success" style="display: none" role="alert" id="alerta1">Se inserto correctamente</div>
+<div class="alert alert-success" style="display: none" role="alert" id="alerta1">Transacción Exitosa!</div>
 <div class="alert alert-danger" style="display: none"  role="alert" id="alerta2">Hubo un problema al insertar el registro</div>
 
-<input type="hidden" name="__IdProducto" IdProducto="__IdProducto" value="{{productos.[0].IdProducto}}">
+<input type="hidden" name="IdProducto" id="IdProducto" value="{{productos.[0].IdProducto}}">
 
 </form>
 
@@ -73,7 +73,7 @@
           precio: $("#Precio").val(),
           existencia:$("#Existencia").val(),
           ope:$("#ope").val(),
-          IdProducto:$("#__IdProducto").val()
+          IdProducto:$("#IdProducto").val()
         },
         function(data,status){
            

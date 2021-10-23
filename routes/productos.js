@@ -45,7 +45,7 @@ router.get('/alta', function(req, res, next) {
 
 router.get('/modificar/:id', function(req, res, next) {
 
-	console.log(req.params.id);
+	//console.log(req.params.id);
 
 	 bd.query('SELECT IdProducto,descripcion,precio,existencia FROM productos WHERE IdProducto = '+req.params.id+' ', function(error, results, fields){
         if (error) {            
@@ -96,6 +96,7 @@ router.post('/operacion', function(req, res, next) {
       	precio = req.body.precio;
       	existencia = req.body.existencia;
       	IdProducto = req.body.IdProducto;
+          //console.log(req.body.id);
 
         query = "UPDATE productos SET descripcion = '"+descripcion+"', precio = '"+precio+"', existencia="+existencia+" WHERE IdProducto = "+IdProducto+" ";
      }else if(tipoOperacion == "d"){
